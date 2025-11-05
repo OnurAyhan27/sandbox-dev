@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Quiz</title>
+</head>
+<body>
+<h2>Was ist 9 + 10?</h2>
+<input type="number" id="antwort" placeholder="Deine Antwort">
+<button onclick="checkAntwort()">Antwort prüfen</button>
+
+<p id="ergebnis"></p>
+
+<script>
+function checkAntwort() {
+    const c = Number(document.getElementById('antwort').value);
+    const ergebnis = document.getElementById('ergebnis');
+
+    if (c === 21) {
+        ergebnis.textContent = "Super, du bist kein Hurensohn!";
+    } else {
+        ergebnis.textContent = "Schade, du bist leider ein Hurensohn :(";
+    }
+}
+</script>
+</body>
+</html>
