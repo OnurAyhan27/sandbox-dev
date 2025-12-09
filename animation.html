@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Wort Animation</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 60px;
+        background-color: #111;
+        color: white;
+    }
+    #anzeige {
+        font-size: 50px;
+        font-weight: bold;
+        margin-top: 30px;
+        letter-spacing: 5px;
+        white-space: pre;
+    }
+</style>
+</head>
+<body>
+
+<h2>Wort-Animation Generator</h2>
+
+<label>Wort eingeben:</label><br>
+<input type="text" id="wort" placeholder="z.B. Hallo"><br><br>
+
+<label>Dauer (in Sekunden):</label><br>
+<input type="number" id="dauer" value="5"><br><br>
+
+<button onclick="startAnimation()">Animation starten</button>
+
+<div id="anzeige"></div>
+
+<script>
+const farben = ["red", "green", "yellow", "blue", "magenta", "cyan"];
+
+let interval;
+
+function startAnimation() {
+    clearInterval(interval);
+
+    const wort = document.getElementById("wort").value;
+    const sekunden = Number(document.getElementById("dauer").value);
+    const anzeige = document.getElementById("anzeige");
+
+    if (wort.trim() === "") {
+        alert("Bitte ein Wort eingeben!");
+        return;
+    }
+
+    const endzeit = Date.now() + sekunden * 1000;
+
+    interval = setInterval(() => {
+        let output = "";
+
+        for (let buchstabe of wort) {
+            const zufall = farben[Math.floor(Math.random() * farben.length)];
+            output += `<span style="color:${zufall}">${buchstabe}</span>`;
+        }
+
+        anzeige.innerHTML = output;
+
+        if (Date.now() >= endzeit) {
+            clearInterval(interval);
+            anzeige.innerHTML = "Animation beendet.";
+        }
+    }, 150);
+}
+</script>
+
+</body>
+</html>
